@@ -12,7 +12,7 @@ export default function PokemonList(props) {
 
   useEffect(() => {
     fetchData(1);
-  }, []);
+  });
 
   function fetchData(page = 1) {
     dispatch(GetPokemonList(page));

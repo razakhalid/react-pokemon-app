@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GetPokemon, GetPokemonList } from "../actions/pokemonActions";
+import { GetPokemon } from "../actions/pokemonActions";
 import _ from "lodash";
 
 export default function Pokemon(props) {
@@ -10,7 +10,7 @@ export default function Pokemon(props) {
 
   useEffect(() => {
     fetchData(pokemonName);
-  }, []);
+  });
 
   function fetchData(p) {
     dispatch(GetPokemon(p));
