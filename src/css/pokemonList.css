@@ -28,6 +28,8 @@
   border-radius: 10px;
   padding: var(--padding);
   display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 60vw;
   /* border: 2px solid black; */
 }
@@ -52,4 +54,19 @@
   color: black;
   border-radius: 7px;
   padding: 10px;
+}
+
+.paginate-wrapper {
+  width: 70%;
+  margin-bottom: 10px;
+}
+
+.pagination {
+  display: flex;
+
+  width: 80%;
+  margin: auto;
+  list-style: none;
+  justify-content: space-between;
+  padding: 0;
 }

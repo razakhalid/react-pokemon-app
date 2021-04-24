@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 import { GetPokemonList } from "../actions/pokemonActions";
 import { Link } from "react-router-dom";
-// import ReactPaginate from "react-paginate";
+import ReactPaginate from "react-paginate";
 
 export default function PokemonList(props) {
   const [search, setSearch] = useState("");
@@ -70,7 +70,20 @@ export default function PokemonList(props) {
         </div>
       </nav>
       <div className="pokemon-list">
-        <div className="pokemon-list__card">{showData()}</div>
+        <div className="pokemon-list__card">
+          {showData()}
+          <div className="paginate-wrapper">
+            {!_.isEmpty(pokemonList.data) && (
+              <ReactPaginate
+                pageCount={Math.ceil(pokemonList.count / 15)}
+                pageRangeDisplayed={2}
+                marginPagesDisplayed={1}
+                onPageChange={(data) => fetchData(data.selected + 1)}
+                containerClassName={"pagination"}
+              />
+            )}
+          </div>
+        </div>
       </div>
     </>
   );
