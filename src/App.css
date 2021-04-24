@@ -1,72 +1,74 @@
+@import "../src/css/pokemonList.css";
+@import "../src/css/pokemon.css";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap");
+
+:root {
+  --title-1: 2em;
+  --title-2: 1.2em;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: "Noto Sans JP", sans-serif;
 }
 
-nav {
-  display: flex;
-  width: 100%;
-  height: 60px;
-  align-items: center;
-  justify-content: flex-end;
+html {
   background-color: coral;
 }
 
-nav a {
-  margin-right: 50px;
-  color: white;
-  text-decoration: none;
-}
-
-.pokemon-list__wrapper {
-  width: 90%;
-  margin: auto;
-}
-
-.pokemon-list__wrapper a {
-  color: black;
-  text-decoration: none;
-}
-
-.pokemon-list__item {
-  margin: 10px 0;
-  display: flex;
+.navbar {
+  color: coral;
   width: 100%;
-  justify-content: space-between;
-  border: 2px solid coral;
-  border-radius: 7px;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.navbar-main-wrapper {
+  font-size: var(--title-2);
+  display: flex;
+  align-items: center;
+}
+
+.navbar-back-icon {
+  position: absolute;
+  left: 20px;
+  top: 10px;
+  font-size: var(--title-2);
+  color: coral;
+  font-size: var(--title-2);
+  font-weight: bold;
+}
+
+.navbar-label {
+  font-size: var(--title-2);
+  font-weight: bold;
   padding: 10px;
 }
 
-.pokemon {
-  width: 90%;
-  margin: auto;
-}
-
-.pokemon__wrapper {
+.body {
   width: 100%;
   display: flex;
-  justify-content: space-between;
-}
-
-.pokemon__wrapper .pokemon__item {
-  width: 30%;
-}
-
-.search-wrapper {
-  display: flex;
-  width: 100%;
-  justify-content: center;
+  flex-direction: column;
+  /* border: 2px solid blue; */
   align-items: center;
-  margin: 20px 0;
 }
 
-.pagination {
-  display: flex;
-  width: 500px;
-  margin: auto;
-  list-style: none;
-  padding: 0;
-  justify-content: space-between;
+.title {
+  font-size: var(--title-2);
+}
+
+.header {
+  text-align: center;
+}
+
+.label {
+  font-weight: bold;
 }

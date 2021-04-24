@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GetPokemon } from "../actions/pokemonActions";
+import { Link } from "react-router-dom";
 import _ from "lodash";
 
 export default function Pokemon(props) {
@@ -20,29 +21,43 @@ export default function Pokemon(props) {
     if (!_.isEmpty(pokemon.data[pokemonName])) {
       const pokeData = pokemon.data[pokemonName];
       return (
-        <div className="pokemon__wrapper">
-          <div className="pokemon__item">
-            <h1>Sprites</h1>
-            <img src={pokeData.sprites.front_default} alt="" />
-            <img src={pokeData.sprites.back_default} alt="" />
-            <img src={pokeData.sprites.front_shiny} alt="" />
-            <img src={pokeData.sprites.back_shiny} alt="" />
+        <>
+          <div className="pokemon">
+            <div className="pokemon__card">
+              <div className="body">
+                <div className="pokemon__imgs-wrapper">
+                  <img src={pokeData.sprites.front_default} alt="" />
+                  <img src={pokeData.sprites.back_default} alt="" />
+                  <img src={pokeData.sprites.front_shiny} alt="" />
+                  <img src={pokeData.sprites.back_shiny} alt="" />
+                </div>
+
+                <div className="pokemon__stats-wrapper">
+                  {pokeData.stats.map((elem) => {
+                    return (
+                      <>
+                        <div className="label pokemon__stat-label">
+                          {elem.stat.name}
+                        </div>
+                        <div className="pokemon__stat">{elem.base_stat}</div>
+                      </>
+                    );
+                  })}
+                </div>
+                <div className="pokemon__abilities-wrapper">
+                  <p className="label pokemon__stat-label">
+                    <p>Abilities</p>
+                  </p>
+                  <ul className="abilities-list">
+                    {pokeData.abilities.map((elem) => {
+                      return <li>{elem.ability.name}</li>;
+                    })}
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="pokemon__item">
-            {pokeData.stats.map((elem) => {
-              return (
-                <p>
-                  {elem.stat.name} {elem.base_stat}
-                </p>
-              );
-            })}
-          </div>
-          <div className="pokemon__item">
-            {pokeData.abilities.map((elem) => {
-              return <p>{elem.ability.name}</p>;
-            })}
-          </div>
-        </div>
+        </>
       );
     }
 
@@ -58,7 +73,17 @@ export default function Pokemon(props) {
   }
   return (
     <div className="pokemon">
-      <h1>{pokemonName}</h1>
+      <nav className="navbar">
+        <Link to={"/pokemon"}>
+          <p className="navbar-back-icon">Back</p>
+        </Link>
+        <div className="navbar-main-wrapper">
+          <p className="navbar-label">
+            {pokemonName.charAt(0).toUpperCase().toUpperCase() +
+              pokemonName.slice(1)}
+          </p>
+        </div>
+      </nav>
       {showData()}
     </div>
   );

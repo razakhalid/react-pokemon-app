@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 import { GetPokemonList } from "../actions/pokemonActions";
 import { Link } from "react-router-dom";
-import ReactPaginate from "react-paginate";
+// import ReactPaginate from "react-paginate";
 
 export default function PokemonList(props) {
   const [search, setSearch] = useState("");
@@ -13,6 +13,10 @@ export default function PokemonList(props) {
   useEffect(() => {
     fetchData(1);
   });
+
+  function firstUpperCase(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
 
   function fetchData(page = 1) {
     dispatch(GetPokemonList(page));
@@ -24,10 +28,14 @@ export default function PokemonList(props) {
         <div className="pokemon-list__wrapper">
           {pokemonList.data.map((elem) => {
             return (
-              <div className="pokemon-list__item">
-                <p>{elem.name}</p>
-                <Link to={`/pokemon/${elem.name}`}>View</Link>
-              </div>
+              <>
+                <Link to={`/pokemon/${elem.name}`}>
+                  <div className="pokemon-list__item">
+                    <p>{firstUpperCase(elem.name)}</p>
+                    <p>View</p>
+                  </div>
+                </Link>
+              </>
             );
           })}
         </div>
@@ -45,24 +53,25 @@ export default function PokemonList(props) {
     return <p>unable to get data</p>;
   }
   return (
-    <div>
-      <div className="search-wrapper">
-        <p>Search: </p>
-        <input type="text" onChange={(e) => setSearch(e.target.value)} />
-        <button onClick={() => props.history.push(`/pokemon/${search}`)}>
-          Search
-        </button>
+    <>
+      <nav className="navbar">
+        <div className="navbar-main-wrapper">
+          <input
+            className="search-bar"
+            type="text"
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <button
+            className="search-button"
+            onClick={() => props.history.push(`/pokemon/${search}`)}
+          >
+            Search
+          </button>
+        </div>
+      </nav>
+      <div className="pokemon-list">
+        <div className="pokemon-list__card">{showData()}</div>
       </div>
-      <div className="pokemon-list">{showData()}</div>
-      {!_.isEmpty(pokemonList.data) && (
-        <ReactPaginate
-          pageCount={Math.ceil(pokemonList.count / 15)}
-          pageRangeDisplayed={2}
-          marginPagesDisplayed={1}
-          onPageChange={(data) => fetchData(data.selected + 1)}
-          containerClassName={"pagination"}
-        />
-      )}
-    </div>
+    </>
   );
 }
