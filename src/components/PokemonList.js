@@ -10,16 +10,24 @@ export default function PokemonList(props) {
   const dispatch = useDispatch();
   const pokemonList = useSelector((state) => state.PokemonList);
 
+  // useEffect(() => {
+  //   fetchData(1);
+  // }, [fetchData(1)]);
+
   useEffect(() => {
     fetchData(1);
-  }, []);
+  });
+
+  const fetchData = (page = 1) => {
+    dispatch(GetPokemonList(page));
+  };
+
+  // function fetchData(page = 1) {
+  //   dispatch(GetPokemonList(page));
+  // }
 
   function firstUpperCase(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
-  }
-
-  function fetchData(page = 1) {
-    dispatch(GetPokemonList(page));
   }
 
   function showData() {
