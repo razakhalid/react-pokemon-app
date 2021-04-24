@@ -50,7 +50,7 @@ export default function Pokemon(props) {
                   </p>
                   <ul className="abilities-list">
                     {pokeData.abilities.map((elem) => {
-                      return <li>{elem.ability.name}</li>;
+                      return <li className="ability">{elem.ability.name}</li>;
                     })}
                   </ul>
                 </div>

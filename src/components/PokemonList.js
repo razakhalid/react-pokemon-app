@@ -12,7 +12,7 @@ export default function PokemonList(props) {
 
   useEffect(() => {
     fetchData(1);
-  });
+  }, []);
 
   function firstUpperCase(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
